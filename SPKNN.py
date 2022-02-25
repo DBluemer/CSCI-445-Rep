@@ -25,16 +25,15 @@ def convertToFloat(row):
 def convertToFloat(column):
     y = raw_data[['Source']].values
     newArray = []
-    for i, r in enumerate(column):
+    for i, c in enumerate(column):
             if i == 0:
-                newArray.append(r)
+                newArray.append(c)
                 continue
             if i == len(column) - 1:
-                newArray.append(r)
+                newArray.append(c)
                 break
-            newArray.append(float(r))
+            newArray.append(float(c))
     return newArray
-
 
 from sklearn.neighbors import KNeighborsClassifier
 neigh = KNeighborsClassifier(n_neighbors=3)

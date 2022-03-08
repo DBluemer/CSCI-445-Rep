@@ -1,4 +1,5 @@
 # coding: utf-8
+# EDIT WAS DONE ON LINE 35 OF THE CODE IN COMPARISON TO THE ORIGINAL PACAKGE
 """
     captcha.image
     ~~~~~~~~~~~~~
@@ -33,6 +34,7 @@ else:
 table  =  []
 for  i  in  range( 256 ):
     table.append(int ( i * 1.97 ) )
+    # line 35 contains an edit compared to the original package, in which variable is declared as int
 
 
 class _Captcha(object):

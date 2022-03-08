@@ -1,16 +1,24 @@
-pip install captcha
 class CAPTCHA:
-    # Import the following modules
+    def generateCaptcha(self):
+        # Import the following modules
     from captcha.image import ImageCaptcha
- 
+
+    #import random module to generate character string
+
+
+#create random string param (test 5)
+
+    result_str = ''.join(
+        (random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') for i in range(5)))
+
     # Create an image instance of the given size
-    image = ImageCaptcha(width = 280, height = 90)
- 
-    # Image captcha text
-    captcha_text = 'TeSt' 
- 
+    image = ImageCaptcha(width=280, height=90)
+
+    # Image captcha text will equal random result
+    captcha_text = result_str
+
     # generate the image of the given text
-    data = image.generate(captcha_text) 
- 
+    data = image.generate(captcha_text)
+
     # write the image on the given file and save it
-    image.write(captcha_text, 'CAPTCHA.png')
+    image.write(captcha_text, 'CAPTCHAman.png')

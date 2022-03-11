@@ -1,40 +1,22 @@
-from re import X
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import sklearn 
 
+from sklearn.model_selection import train_test_split
+
 raw_data = pd.read_csv('datasetf.csv')
-print(raw_data)
 
-def convertToFloat(row):
-    X = raw_data[['Destination','Length','Qname','QType','DNS_TTL']].values
-    
-    newArray = []
-    for i, r in enumerate(row):
-            if i == 0:
-                newArray.append(r)
-                continue
-            if i == len(row) - 1:
-                newArray.append(r)
-                break
-            newArray.append(float(r))
-    return newArray
+y = raw_data['Source']
 
-def convertToFloat(column):
-    y = raw_data[['Source']].values
-    newArray = []
-    for i, c in enumerate(column):
-            if i == 0:
-                newArray.append(c)
-                continue
-            if i == len(column) - 1:
-                newArray.append(c)
-                break
-            newArray.append(float(c))
-    return newArray
+x = raw_data[['Destination','Time','Length','domain_length']].values
+
+x_training_data, x_test_data, y_training_data, y_test_data = train_test_split(x, y, test_size = 0.3)
 
 from sklearn.neighbors import KNeighborsClassifier
-neigh = KNeighborsClassifier(n_neighbors=3)
-neigh.fit(X, y)
+model = KNeighborsClassifier(n_neighbors=3)
+
+model.fit(x_training_data, y_training_data)
+
+predictions = model.predict(x_test_data)

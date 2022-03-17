@@ -1,5 +1,5 @@
 import pandas as pd
-df = pd.read_csv("datasetf.csv", delimiter=",")
+newdf = pd.read_csv("datasetf.csv", delimiter=",")
 
 import numpy as np
 import pandas as pd
@@ -7,9 +7,13 @@ from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn import metrics
+import matplotlib.pyplot as plt
+
+
+df = newdf.dropna(axis=0)
 
 y = df['Source']
-x = df[['IP_TTL','Time','Length']].values
+x = df[['DNS_TTL','IP_TTL','Time','Length']].values
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=3)
 

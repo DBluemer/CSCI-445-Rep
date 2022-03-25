@@ -46,3 +46,22 @@ from sklearn.metrics import confusion_matrix
 print(classification_report(y_train, predictions))
 
 print(confusion_matrix(y_train, predictions))
+
+from sklearn import preprocessing
+
+x_train = np.array([[ 1., -1.,  2.],
+                    [ 2.,  0.,  0.],
+                   [ 0.,  1., -1.]])
+scaler = preprocessing.StandardScaler().fit(x_train)
+scaler
+
+X_scaled = scaler.transform(x_train)
+X_scaled
+
+from sklearn.linear_model import LogisticRegression
+from sklearn import model_selection
+
+kfold = model_selection.KFold(n_splits=10, random_state=None)
+model = LogisticRegression()
+results = model_selection.cross_val_score(model, x_test, y_test, cv=kfold)
+print("Accuracy: %.3f%% (%.3f%%)" % (results.mean()*100.0, results.std()*100.0))

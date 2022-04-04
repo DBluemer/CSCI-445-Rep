@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title> Example </title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+        <link rel="shortcut icon" href="#">
+        <style>
+            html {
+                display: flex;
+                justify-content: center;
+            }
+            #CaptchaBlock {
+                zoom: 2;
+                display: inline-block;
+                padding: 20px;
+                background-color: #840300;
+
+            }
+            #Text {
+                display: inline-block;
+                background-color: #e9cf7c;
+                padding: 10px;
+                margin-top: 10.5px;
+                margin-right:15px;
+                margin-bottom: 0px;
+                margin-left: 10.5px;
+                height: 48px;
+            }
+            input {
+                background-color: #ca3421;
+                border-color: #360303;
+                border-style: solid;
+            }
+            #Input {
+                display: block;
+                margin-bottom: 6px;
+            }
+            #CaptchaInput {
+                background-color: white;
+                border-color: orange;
+            }
+            #CaptchaInput:focus {
+                outline-width: 0;
+            }
+            #buttons {
+                float: right;
+                width: 140px;
+            }
+            #CaptchaText {
+                width: 60px;
+                height: 30px;
+                margin-top: 10px;
+            }
+            #CaptchaSubmit {
+                width: 60px;
+                height: 30px;
+                margin-left: 6px;
+            }
+            #CaptchaAudio {
+                width: 60px;
+                height: 30px;
+                margin-left: 6px;
+            }
+            #CaptchaReset {
+                width: 60px;
+                height: 30px;
+                margin-top: 10px;
+            }
+            #Captcha {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 8px;
+            {
+        </style>
+    </head>
+    <body>
+        <div id = "CaptchaBlock">
+            <div id="Captcha"></div>
+            <div id ="Text">
+                <label id = "Input"> Type the characters above: </label>
+                <input type="text" id="CaptchaInput">
+            </div>
+            <div id = "buttons">
+                <input type="button" value="Text" id="CaptchaText">
+                <input type="button" value="Audio" id="CaptchaAudio">
+                <input type="button" value="Reset" id="CaptchaReset">
+                <input type="button" value="Enter" id="CaptchaSubmit">
+            </div>
+        </div>
+        <script>
+            var TextMode = true;
+            var CaptchaValue;
+            getTextCaptcha();
+            CaptchaText.addEventListener("click", function() {
+                if(TextMode == false) {
+                    TextMode = true;
+                    getTextCaptcha();
+                }
+            })
+            CaptchaAudio.addEventListener("click", function() {
+                if(TextMode == true) {
+                    TextMode = false;
+                    getAudioCaptcha();
+                }
+            })
+            CaptchaSubmit.addEventListener("click", function() {
+            var Input = document.getElementById('CaptchaInput').value
+                if(Input === CaptchaValue) {
+                    window.location.href = "http://localhost:63342/Captcha/templates/loading.html?_ijt=nijq9d07lginnbbbvrlv3v2d5j";
+                } else {
+                    if(TextMode == true) {
+                        getTextCaptcha();
+                    } else {
+                        getAudioCaptcha();
+                    }
+                }
+            })
+            CaptchaReset.addEventListener("click", function() {
+                if(TextMode == true) {
+                    getTextCaptcha();
+                } else {
+                    getAudioCaptcha();
+                }
+            })
+            function newTextCaptcha () {
+                var textCaptcha;
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "/getTextCaptcha",
+                    data: textCaptcha,
+                    contentType:"application/text; charset=utf-8",
+                    success: function (data) {
+                        textCaptcha = data;
+                    }
+                });
+                return textCaptcha;
+            }
+            function newAudioCaptcha () {
+                var audioCaptcha;
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "/getAudioCaptcha",
+                    data: audioCaptcha,
+                    contentType:"application/text; charset=utf-8",
+                    success: function (data) {
+                        audioCaptcha = data;
+                    }
+                });
+                return audioCaptcha;
+            }
+            function getTextCaptcha() {
+                CaptchaValue = newTextCaptcha();
+                console.log(CaptchaValue);
+                document.getElementById("Captcha").innerHTML = "";
+                var img = document.createElement("img");
+                img.src = "http://localhost:63342/Captcha/" + CaptchaValue + ".png";
+                var src = document.getElementById("Captcha");
+                src.appendChild(img);
+            }
+            function getAudioCaptcha() {
+                CaptchaValue = newAudioCaptcha();
+                console.log(CaptchaValue);
+                document.getElementById("Captcha").innerHTML = "";
+                var sound = document.createElement('audio');
+                sound.id = 'audio-player';
+                sound.controls = 'controls';
+                sound.src = "http://localhost:63342/Captcha/" + CaptchaValue + ".wav";
+                sound.type = 'audio/wav';
+                document.getElementById('Captcha').appendChild(sound);
+            }
+        </script>
+    </body>
+</html>

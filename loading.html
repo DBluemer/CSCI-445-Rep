@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading</title>
+    <style>
+        html {
+            background-image: url("http://localhost:63342/Captcha/Stop.png");
+            background-repeat: repeat;
+        }
+        #Loading {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 10px;
+            border: 5px;
+            border-style: solid;
+            border-color: red;
+        }
+    </style>
+    <script>
+        setTimeout(function(){
+            //window.location.href = 'https://www.google.com';
+         }, 5000);
+    </script>
+</head>
+<body>
+    <div id = "Loading">
+        <img src="http://localhost:63342/Captcha/Stop.png" alt="Stop" width="200px" height="200px">
+        <h1> Hold On! </h1>
+        <h2> You are being redirected, this may take up to 5 seconds! </h2>
+    </div>
+</body>
+</html>

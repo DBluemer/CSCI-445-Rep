@@ -1,7 +1,5 @@
 import urllib.request
 from wordpress_xmlrpc import Client, WordPressPost
-from wordpress_xmlrpc.methods import posts
-from xmlrpc import client
 from wordpress_xmlrpc.compat import xmlrpc_client
 from wordpress_xmlrpc.methods import media, posts
 import os

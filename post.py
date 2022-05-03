@@ -1,7 +1,7 @@
 import urllib.request
 from wordpress_xmlrpc import Client, WordPressPost
 from wordpress_xmlrpc.methods import posts
-import xmlrpc
+from xmlrpc import client
 from wordpress_xmlrpc.compat import xmlrpc_client
 from wordpress_xmlrpc.methods import media, posts
 import os
@@ -24,10 +24,10 @@ class Custom_WP_XMLRPC:
     def post_article(self, wpUrl, wpUserName, wpPassword, articleTitle, articleCategories, articleContent, articleTags,
                      PhotoUrl):
         self.path = os.getcwd() + "\\00000001.jpg"
-        self.articlePhotoUrl = "https://media.istockphoto.com/photos/cute-blue-robot-giving-thumbs-up-3d-picture-id1350820098?b=1&k=20&m=1350820098&s=170667a&w=0&h=8gO4GcPH-wsEZS6PYn2WXbQN3ZPPv98vE6mBl-Ckwr8='"
-        self.wpUrl = "https://csciteam4bds.com/"
-        self.wpUserName ="csciteam"
-        self.wpPassword = "C5c!T3amF0ur"
+        self.articlePhotoUrl = articlePhotoUrl
+        self.wpUrl = wpUrl
+        self.wpUserName = wpUserName
+        self.wpPassword = wpPassword
         # Download File
         f = open(self.path, 'wb')
         f.write(urllib.request.urlopen(self.articlePhotoUrl).read())
@@ -36,7 +36,10 @@ class Custom_WP_XMLRPC:
         client = Client(self.wpUrl, self.wpUserName, self.wpPassword)
         filename = self.path
         # prepare metadata
-        data = {'name': 'picture.jpg', 'type': 'image/jpg', }
+        data = {
+            'name': 'picture.jpg',
+            'type': 'image/jpg',
+        }
 
         # read the binary file and let the XMLRPC library encode it into base64
         with open(filename, 'rb') as img:
@@ -61,12 +64,12 @@ class Custom_WP_XMLRPC:
 
 # Url of Image on the internet
 articlePhotoUrl = 'https://media.istockphoto.com/photos/cute-blue-robot-giving-thumbs-up-3d-picture-id1350820098?b=1&k=20&m=1350820098&s=170667a&w=0&h=8gO4GcPH-wsEZS6PYn2WXbQN3ZPPv98vE6mBl-Ckwr8='
-# Dont forget the /xmlrpc.php cause thats your posting adress for XML Server
+# Dont forget the /xmlrpc.php cause that's your posting address for XML Server
 wpUrl = 'https://csciteam4bds.com/xmlrpc.php'
 # WordPress Username
-wpUserName = 'csciteam'
+wpUserName = 'csciteam4bds'
 # WordPress Password
-wpPassword = 'C5c!T3amF0ur'
+wpPassword = '4adq Hxfs cNdo PQ3m 26dh'
 # Post Title
 articleTitle = 'post testing'
 # Post Body/Description

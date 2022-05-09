@@ -1,5 +1,8 @@
-import SPDecisionTree
-
+pimport SPDecisionTree
+from SPDecisionTree import predicted 
+from SPDecisionTree import df
+from SPDecisionTree import x
+from SPDecisionTree import predictions
 import csv
 
 items = []
@@ -11,5 +14,13 @@ with open('datasetf.csv') as csvfile:
 
 print(items)
 
+print(df.loc[df['No.'] == int(items[3]), 'Source'])
 
-#### Create a function for retreiveing the ip addresses of potential bots in the system
+ip = df[['Source']].values 
+
+for i in range(len(ip)):
+	if any((ip)) == any(predictions):
+		print("The following is a bot!")
+	else:
+		print("The following is a normal user")
+
